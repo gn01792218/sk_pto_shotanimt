@@ -1,0 +1,28 @@
+package school;
+syntax = "proto3";
+import "User.proto";
+import "Class.proto";
+
+message PBStudent {
+   required int64 studentId = 0;
+   required PBUser user = 1;
+   required PBClass class = 2;
+   required PBStudentDegree degree = 3;
+}
+
+enum PBStudentDegree {
+  PRIMARY = 0;   // 小学生
+  MIDDLE = 1;    // 中学生
+  SENIOR = 2;    // 高中生
+  COLLEGE = 3;   // 大学生
+}
+
+message PBStudentListReq {
+required int32 offset = 1;
+required int32 limit = 2;
+}
+
+message PBStudentListRsp {
+  repeated PBStudent list = 1;
+}
+
