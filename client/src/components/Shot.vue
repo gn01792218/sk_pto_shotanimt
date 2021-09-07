@@ -12,7 +12,7 @@
             </div>
             點我下注
         </div>
-        <div v-if="oneMoney!=0" class="money">下注額{{oneMoney}}</div>
+       <div v-if="oneMoney!=0" class="money">下注額{{oneMoney}}</div>
         </div>
         <div>
         <div class="two" @click="shot($event)">
@@ -22,10 +22,9 @@
                     >{{i}}</li>
                 </ul>
             </div>
-            點我下注
-            
+             點我下注
             </div>
-        <div v-if="twoMoney!=0" class="money">下注額{{twoMoney}}</div>
+            <div v-if="twoMoney!=0" class="money">下注額{{twoMoney}}</div>
         </div>
         <div>
         <div class="three" @click="shot($event)">
@@ -36,6 +35,7 @@
                 </ul>
              </div>
              點我下注
+              
         </div>
         <div v-if="threeMoney!=0" class="money">下注額{{threeMoney}}</div>
         </div>
@@ -286,13 +286,9 @@ export default {
         bottom:2%;
     }
     .pice5{
-        left:65%;
+        left:70%;
         bottom:2%;
     }
-}
-.shot_0{
-    position: absolute;
-    left:50%;
 }
 .picposition{
     list-style: none;
@@ -307,5 +303,4 @@ export default {
 .title{
     display: inline;
 }
-
 </style>
