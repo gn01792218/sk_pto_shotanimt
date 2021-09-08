@@ -76,10 +76,6 @@
             <li class="shotEmojiPice pice5"
              v-for="i,index in shotEmoji.pice5" :key="index+1">{{i}}</li>
             </transition-group>
-            <!-- <transition-group @enter="enter">
-            <li :class="[`shot_${index}`,'shotEmojiPice']"
-             v-for="i,index in shotEmoji" :key="index+1">{{i}}</li>
-            </transition-group> -->
         </ul>
     </section>
   </div>
