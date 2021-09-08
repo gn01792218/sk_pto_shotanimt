@@ -1,4 +1,4 @@
-# sk_pto_shotanimt
+# sk_pto_shotanimt_Slider
 socketIo聊天室及protobuf檔案傳輸、射擊和表情符號動畫
 
 ## 啟動server
