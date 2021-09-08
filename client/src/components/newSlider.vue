@@ -3,7 +3,6 @@
       <h1>Vue Slider</h1>
      <div class="slider">
         <transition-group tag="div" class="slider_img" @enter="imgEnter">
-            <!-- <img src="../assets/sliderImg/3.jpg" alt=""> -->
             <img class="simg" v-for="(i,index) in imgList" :key="i" :src="i" alt="圖片" width=600 height=400 v-show="active==index">
         </transition-group>
         <ul class="img_dot">
@@ -38,7 +37,7 @@ export default {
             autoPlay:true,
             playSecond:1, //秒為單位
             timer:null, //自動輪播計時器
-            imgList:["http://localhost:8080/static/img/0.7c68064.jpg","http://localhost:8080/static/img/1.a457e1b.jpg","http://localhost:8080/static/img/2.83784d3.jpg","http://localhost:8080/static/img/3.86ae87e.jpg"],
+            imgList:["http://localhost:8080/static/img/0.jpg","http://localhost:8080/static/img/1.jpg","http://localhost:8080/static/img/2.jpg","http://localhost:8080/static/img/3.jpg"],
         }
     },
     created(){
@@ -62,7 +61,9 @@ export default {
                 this.timer = setInterval(()=>{ //重啟計時器
                 this.active = (this.active+1)%this.imgNumber;
                 },this.playTime)
+                alert(`"修改秒數為"${this.playSecond}`);
             }else{
+                alert(`"修改秒數為"${this.playSecond}`);
                 console.log(this.playTime)
             }
         },
