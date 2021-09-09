@@ -15,8 +15,8 @@
          </ul>
      </div>
      <section class="playOption">
-         <button class="playBtn" type="button" v-if="!autoPlay" @click="_autoPlay">關閉自動輪播</button> 
-      <button class="playBtn" type="button" v-else @click="_autoPlay">開啟自動輪播</button>
+         <button class="playBtn" type="button" v-if="!autoPlay" @click="_autoPlay">開啟自動輪播</button> 
+      <button class="playBtn" type="button" v-else @click="_autoPlay">關閉自動輪播</button>
       <div class="editPlaySecond">
         <input class="playSeconInput" type="text" placeholder="輸入豪秒數" v-model="playSecond"> 
         <button type="button" @click="setPlayTime">修改輪播秒數</button>
@@ -34,7 +34,7 @@ export default {
         return{
             active:0,
             isPre:false,
-            autoPlay:true,
+            autoPlay:false,
             playSecond:1, //秒為單位
             timer:null, //自動輪播計時器
             // imgList:[],
@@ -58,41 +58,46 @@ export default {
         }
     },
     methods:{
-        setPlayTime(){
-            if(this.timer){
-                console.log("重新啟動計時器",this.playTime)
+        setTimer(){ //設置計時器
+            if(this.timer){ //有timer的情況下會重置
                 clearInterval(this.timer); //清除原本的計時器
                 this.timer = setInterval(()=>{ //重啟計時器
                 this.active = (this.active+1)%this.imgNumber;
                 },this.playTime)
-                alert(`"修改秒數為"${this.playSecond}`);
-            }else{
-                alert(`"修改秒數為"${this.playSecond}`);
-                console.log(this.playTime)
+            }else{ //沒timer的情況下會設置計時器
+                this.timer = setInterval(()=>{ 
+                this.active = (this.active+1)%this.imgNumber;
+                },this.playTime)
             }
         },
-        _autoPlay(){
+        setPlayTime(){ //設置自動輪播秒數的方法
+            if(this.timer){
+                this.setTimer();
+                alert(`"修改秒數為"${this.playSecond}`);
+            }else{  //還沒開啟自動撥放的時候，也可以先設置秒數
+                alert(`"修改秒數為"${this.playSecond}`);
+            }
+        },
+        _autoPlay(){  //開啟/關閉自動輪播的方法
+            this.autoPlay = !this.autoPlay;
             if(this.autoPlay){
                 console.log("開啟自動輪播")
-                this.timer = setInterval(()=>{
-                this.active = (this.active+1)%this.imgNumber;
-            },this.playTime)
-            }else{
-                console.log("關閉自動輪播")
-                clearInterval(this.timer);
+                this.setTimer();
+                return
             }
-            this.autoPlay = !this.autoPlay;
+            console.log("關閉自動輪播")
+            clearInterval(this.timer);
         },
-        changeImage(index){
+        changeImage(index){ //手動點擊下方按鈕的方法
             this.active =index;
+            this.timer ? this.setTimer() : ""
         },
-        changeImgByBtn(num){ //按前後按鈕
-            // if(num<0){num=this.imgNumber-1}
-            //num+圖片張數，確保點到0的時候回到最後一張
+        changeImgByBtn(num){ //手動按前後按鈕的方法
+            //num+圖片張數，確保點到0的時候回到最後一張。 等於// if(num<0){num=this.imgNumber-1}
             this.active =(num+this.imgNumber) % this.imgNumber;
-            console.log(this.isPre)
+            this.timer ? this.setTimer() : ""
         },
-        imgEnter(e){
+        imgEnter(e){ //控制按鈕前後的圖片滑入動畫
             switch(this.isPre){
                 case false:
                 gsap.to(e,{
