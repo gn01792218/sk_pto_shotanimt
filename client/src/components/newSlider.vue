@@ -37,7 +37,8 @@ export default {
             autoPlay:true,
             playSecond:1, //秒為單位
             timer:null, //自動輪播計時器
-            imgList:["http://localhost:8080/static/img/0.jpg","http://localhost:8080/static/img/1.jpg","http://localhost:8080/static/img/2.jpg","http://localhost:8080/static/img/3.jpg"],
+            // imgList:[],
+            // imgList:["http://localhost:8080/static/img/0.jpg","http://localhost:8080/static/img/1.jpg","http://localhost:8080/static/img/2.jpg","http://localhost:8080/static/img/3.jpg"],
         }
     },
     created(){
@@ -51,6 +52,9 @@ export default {
         },
         playTime(){ //轉換為毫秒
             return this.playSecond*1000;
+        },
+        imgList(){  //取得Vuex裡面存放的圖片資料
+            return this.$store.getters.imgList;
         }
     },
     methods:{
