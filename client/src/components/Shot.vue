@@ -108,24 +108,18 @@ export default {
             },
             picposition:["onePicPosition","twoPicPosition","threePicPosition"],
             onePicPosition:[],//第一區裝籌碼的地方
-            twoPicPosition:[],//第二區裝籌碼的地方
-            threePicPosition:[],//第三區裝籌碼的地方
-            onePicTop:160, //第一區的起始絕對位置
-            twoPicTop:160,//第二區的起始絕對位置
-            threePicTop:160,//第三區的起始絕對位置
-            oneZIndex:0, //起始的z-index
-            twoZIndex:0, //起始的z-index
-            threeZIndex:0, //起始的z-index
+            twoPicPosition:[],
+            threePicPosition:[],
+            onePicTop:160, //第一區的籌碼生成起始絕對位置
+            twoPicTop:160,
+            threePicTop:160,
             oneMoney:0,//在第一區下注的起始金錢
             twoMoney:0,
             threeMoney:0,
         }
     },
-    mounted(){
-        console.log(this.emojiList);
-    },
     methods:{
-        selectedEmoji(e,emoji){ //選擇籌碼
+        selectedEmoji(e,emoji){ //點擊選擇籌碼
             this.currentEmoji =emoji;
            //設置籌碼起始點的座標
             this.startPosition.x = e.x;
@@ -152,7 +146,7 @@ export default {
                     break;
             }
         },
-        enter(e){  //讓籌碼飛的動畫
+        enter(e){  //讓籌碼飛向目標的動畫
             gsap
             .to(e,{
                 keyframes:[
@@ -200,7 +194,6 @@ export default {
                     this.oneMoney+=this.currentMoney; //每次都會更新$$
                     this.onePicTop-=5; //每次籌碼都會往上偏移
                     this.oneZIndex+=1; //並且z-index權重提高
-                    fChild.style.zIndex=this.oneZIndex;
                     fChild.style.top=`${this.onePicTop}px`;
                     break;
                 case 'two':
@@ -208,7 +201,6 @@ export default {
                     this.twoMoney+=this.currentMoney;
                        this.twoPicTop-=5;
                        this.twoZIndex+=1;
-                    fChild.style.zIndex=this.twoZIndex;
                     fChild.style.top=`${this.twoPicTop}px`;
                     break;
                 case 'three':
@@ -216,7 +208,6 @@ export default {
                     this.threeMoney+=this.currentMoney;
                     this.threePicTop-=5;
                     this.threeZIndex+=1;
-                    fChild.style.zIndex=this.threeZIndex;
                     fChild.style.top=`${this.threePicTop}px`;
                     break;
             }  
@@ -231,7 +222,6 @@ export default {
     width:400px;
     margin-left:auto;
     margin-right: auto;
-    
     .one,.two,.three{
         margin-top: 20px;
         border:black 10px solid;

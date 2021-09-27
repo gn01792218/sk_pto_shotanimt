@@ -29,6 +29,7 @@
 <script>
 import gsap from 'gsap';
 import {Power0} from 'gsap'
+import {mapState} from 'vuex'
 export default {
     data(){
         return{
@@ -53,6 +54,18 @@ export default {
         playTime(){ //轉換為毫秒
             return this.playSecond*1000;
         },
+        //使用mapState取得state
+        // ...mapState({
+        //     //第一種方法
+        //     // imgList:state=>state.imgList,
+        //     //第二種方法，只需要拿資料，不需要動手腳，推薦使用這個
+        //     // imgList:'imgList',
+        //     //第三種方法，若要結合local資料做操作，可以使用這個方法，較有操作彈性
+        //     // imgList(state){
+        //     //     return state.imgList;
+        //     // }
+        // })
+        //使用getter取得state
         imgList(){  //取得Vuex裡面存放的圖片資料
             return this.$store.getters.imgList;
         }

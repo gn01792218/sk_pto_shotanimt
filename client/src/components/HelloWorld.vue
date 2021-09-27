@@ -45,9 +45,9 @@
 
 <script>
 import flvjs from "flv.js";
-import protoRoot from "@/proto/proto";
+import protoRoot from "@/proto/proto";  //一定要導入轉成json格式的proto文件(protoRoot名稱是自訂的)
 import protobuf from "protobufjs";
-import {TweenMax,Power0,TimelineMax,Power4,Power1} from 'gsap';
+import {gsap,Power0,Power4,Power1} from 'gsap';
 const emojiList ="❤,😒,😊,😂,😍,🤣";
 export default {
   name: 'HelloWorld',
@@ -69,7 +69,7 @@ export default {
   },
   mounted() {
     // console.log(this.temp);
-    // this.createFlv();//開啟直播
+    this.createFlv();//開啟直播
     this.$socket.on("proto", (obj) => {
       let UData = new Uint8Array(obj); //先將二arrayBuf轉成Unit8Array
       //注意:使用箭頭函式才能抓的到this唷~!
@@ -93,9 +93,8 @@ export default {
     enter(emoji){
       //點到就做gsap動畫
       //注意class名稱前面要加.唷!(id記得加#)
-        let tl = new TimelineMax(); //創建一個timeline來播放三個階段的動畫
         let id = emoji; //抓取元素
-        tl.set(id,{ //使用set設置初始化狀態
+        gsap.set(id,{ //使用set設置初始化狀態
           scale:0.5,
           x:Math.random()*-100+20, //初始x位置在1~100之間
         })
@@ -114,7 +113,7 @@ export default {
     addEmoji(emoji){
       this.currentEmojiList.push(emoji); //被點到的裝到選中的比情符號列表
     },
-    createFlv() {
+    createFlv() { //創建直播
       let url = "http://xxxxxxxx.flv";
       if (flvjs.isSupported()) {
         let videoElement = document.getElementById("videoElement");
